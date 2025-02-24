@@ -1,0 +1,20 @@
+[project]
+name = "rest-practice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=8.3.4",
+    "requests>=2.32.3",
+    "urllib3>=2.3.0",
+]
+
+# set up pytest
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+pythonpath = [
+    "./src"
+]
