@@ -1,0 +1,17 @@
+
+# pubmed terms
+pubmed_terms: 
+  terms: ["Nonalcoholic Steatohepatitis", "NASH", "LILRB2"]
+  fields: ["tiab", "tiab", "tw"]
+
+# string terms  
+string_terms:
+  gene_names: ["LILRB2"]
+  species: 9606
+
+# llm config terms
+llm_config:
+  model_specification: "models/gemini-1.5-flash"
+  instructions: "../data/hypothesis_prompt_instructions.txt"
+  
+
