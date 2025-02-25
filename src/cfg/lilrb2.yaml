@@ -3,6 +3,7 @@
 pubmed_terms: 
   terms: ["Nonalcoholic Steatohepatitis", "NASH", "LILRB2"]
   fields: ["tiab", "tiab", "tw"]
+  retmax: 100
 
 # string terms  
 string_terms:

@@ -42,6 +42,7 @@ class LLMMessenger(object):
         # Context has to be formed into a single string
         if len(context) > 1:
             context = " ".join(context)
+        query = " ".join(query)
         return [Part(text=context), Part(text=query)]
 
     def generate_response(
