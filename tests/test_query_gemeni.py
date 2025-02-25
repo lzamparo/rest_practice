@@ -1,17 +1,17 @@
 import pytest
-from src.hypotheses.query_gemeni import (
-    generate_response,
-    get_gemeni_client,
-    get_hypothesis_instructions,
-)
+from src.hypotheses.query_gemeni import LLMMessenger
+
+
+@pytest.fixture(scope="session")
+def llm_messenger():
+    return LLMMessenger()
 
 
 @pytest.fixture
-def get_hypothesis_instructions_fixture():
-    import os
-
-    print(f"we are in {os.getcwd()}")
-    return get_hypothesis_instructions(file_path="./data/hypothesis_prompt")
+def get_hypothesis_instructions_fixture(llm_messenger):
+    return llm_messenger._get_hypothesis_instructions(
+        file_path="./data/hypothesis_prompt"
+    )
 
 
 @pytest.fixture
@@ -53,26 +53,24 @@ def get_negative_string_test():
 ## test below here
 
 
-def test_positive_string(get_positive_string_test):
+def test_positive_string(get_positive_string_test, llm_messenger):
     query, context = get_positive_string_test
-    client = get_gemeni_client()
     instructions = [
         "please provide an answer that begis with yes or no, with justification that follows"
     ]
-    response = generate_response(
-        query=query, client=client, context=context, instructions=instructions
+    response = llm_messenger.generate_response(
+        query=query, context=context, instructions=instructions
     )
     assert ("Yes" in response.text) or ("yes" in response.text)
 
 
-def test_negative_string(get_negative_string_test):
+def test_negative_string(get_negative_string_test, llm_messenger):
     query, context = get_negative_string_test
-    client = get_gemeni_client()
     instructions = [
         "please provide an answer that begis with yes or no, with justification that follows"
     ]
-    response = generate_response(
-        query=query, client=client, context=context, instructions=instructions
+    response = llm_messenger.generate_response(
+        query=query, context=context, instructions=instructions
     )
     assert ("No" in response.text) or ("no" in response.text)
 
