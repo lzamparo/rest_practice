@@ -1,5 +1,5 @@
 import pytest
-from src.hypotheses.llm_messenger import LLMMessenger
+from src.llm.llm_messenger import LLMMessenger
 
 
 @pytest.fixture(scope="session")
